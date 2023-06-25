@@ -1,0 +1,20 @@
+#	Ambient light
+#	intensity	color
+A	0.2			255,255,255
+
+#	Camera
+#	position	orientation		FOV
+# C	0,0,0		0,0,1			152 grand angular
+C	0,1,30		0,0,1			70
+
+#	Light
+#	position	intensity		
+L	3.5,-5,-10		1
+sp	3.5,-6,-10		0.5  		     	255,255,0
+
+# ROUGE
+sp	2,-2,-10		1.5  		     	255,33,0
+
+#	Cylinder
+sp	0,3,-5			5.5  		     	255,0,255
+cy	0,3,-5			1,1,1		5	 		10 			10,0,255
