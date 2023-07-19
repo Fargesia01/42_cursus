@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 class BitcoinExchange
 {
@@ -15,17 +16,20 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		BitcoinExchange	&operator=(const BitcoinExchange &src);
+   
+		double				valueOnDay(int day);
+		double				getTotalValues(std::string filename);
+		static std::map<int, double>	extractData(std::string filename);
+		static int			file_error();
 
-		int				valueOnDay(const std::string day) const;
-		static std::map<int, int>	extractData(std::string filename) const;
-		static int			file_error() const;
-
-		std::map<int, int>	getValues() const;
-		void			setValues(int, int> values);
+		std::map<int, double>	getValues() const;
+		void			setValues(std::map<int, double> values);
 
 	private :
 
-		std::map<int, int> _values;
-}
+		std::map<int, double> _values;
+
+		BitcoinExchange(void);
+};
 
 #endif
