@@ -18,7 +18,7 @@ class BitcoinExchange
 		BitcoinExchange	&operator=(const BitcoinExchange &src);
    
 		double				valueOnDay(int day);
-		double				getTotalValues(std::string filename);
+		void				getTotalValues(std::string filename);
 		static std::map<int, double>	extractData(std::string filename);
 		static int			file_error();
 
@@ -27,9 +27,12 @@ class BitcoinExchange
 
 	private :
 
-		std::map<int, double> _values;
+		std::map<int, double>	_values;
 
 		BitcoinExchange(void);
+		static int	dateToInt(std::string date);
+		static bool	checkDate(int date);
+		static bool	checkLine(std::string line);
 };
 
 #endif
