@@ -17,7 +17,7 @@ int	compute(std::string argv)
 		{
 			if (stack.size() < 2)
 			{
-				std::cout << "Error" << std::endl;
+				std::cout << "Error: not enough numbers" << std::endl;
 				exit(1);
 			}
 			tmp = stack.top();
@@ -46,12 +46,12 @@ bool	checkWord(std::string word)
 {
 	if (word.length() != 1)
 	{
-		std::cout << "Error" << std::endl;
+		std::cout << "Error: Expression too long" << std::endl;
 		return (false);
 	}
 	if (!std::isdigit(word[0]) && word[0] != '+' && word[0] != '-' && word[0] != '*' && word[0] != '/')
 	{
-		std::cout << "Error" << std::endl;
+		std::cout << "Error: char not accepted" << std::endl;
 		return (false);
 	}
 	return (true);

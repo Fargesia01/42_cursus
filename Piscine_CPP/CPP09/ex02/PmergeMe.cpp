@@ -1,109 +1,102 @@
-#include "PmergeMe.hpp"
+#include "PmergeMe.h"
 
-PmergeMe::PmergeMe(void)
+void	vectorInsertSort(std::vector<int> &vec, int left, int right)
 {
-	return ;
-}
-
-PmergeMe::PmergeMe(char **argv)
-{
-	for (int i = 1; argv[i]; i++)
+	for (int i = left + 1; i <= right; ++i)
 	{
-		this->_vec.push_back(std::atoi(argv[i]));
-		this->_list.push_back(std::atoi(argv[i]));
+		int key = vec[i];
+		int j = i - 1;
+		while (j >= left && vec[j] > key)
+		{
+			vec[j + 1] = vec[j];
+			j--;
+		}
+		vec[j + 1] = key;
 	}
 }
 
-PmergeMe::PmergeMe(const PmergeMe &src)
+void	vectorMerge(std::vector<int> &vec, int left, int mid, int right)
 {
-	*this = src;
-}
+	int i = left;
+	int j = mid + 1;
 
-PmergeMe::~PmergeMe(void)
-{
-	return ;
-}
-
-PmergeMe &PmergeMe::operator=(const PmergeMe &src)
-{
-	return (*this);
-}
-
-void	PmergeMe::sort()
-{
-	this->createVPairs();
-	for (int i = 0; i < _tmpVec.size(); i++)
-		std::cout << "VECTOR before: " << _tmpVec[i].first << _tmpVec[i].second << std::endl;
-	this->orderVPairs();
-	for (int i = 0; i < _tmpVec.size(); i++)
-		std::cout << "VECTOR after: " << _tmpVec[i].first << _tmpVec[i].second << std::endl;
-	
-	this->createLPairs();
-	for (std::list<std::pair<int, int>>::iterator it = _tmpList.begin(); it != _tmpList.end(); it++)
-		std::cout << "LIST: " << it->first << it->second << std::endl;
-	this->orderLPairs();
-	for (std::list<std::pair<int, int>>::iterator it = _tmpList.begin(); it != _tmpList.end(); it++)
-		std::cout << "LIST: " << it->first << it->second << std::endl;
-
-	std::cout << _straggle << std::endl;
-}
-
-void	PmergeMe::createLPairs()
-{
-	for (std::list<int>::iterator it = _list.begin(); it != _list.end(); it++)
+	while (i <= mid && j <= right)
 	{
-		int tmp = *it;
-		it++;
-		if (it == _list.end())
-			break ;
-		_tmpList.push_back(std::make_pair(tmp, *it));
-	}
-	if (_list.size() % 2 != 0)
-		_straggle = _list.back();
-}
-
-void	PmergeMe::createVPairs()
-{
-	for (int i = 0; i < _vec.size(); i += 2)
-	{
-		if (i != _vec.size() - 1)
-			_tmpVec.push_back(std::make_pair(_vec[i], _vec[i + 1]));
-	}
-	if (_vec.size() % 2 != 0)
-		_straggle = _vec[_vec.size() - 1];
-}
-
-void	PmergeMe::orderLPairs()
-{
-	for (std::list< std::pair<int, int> >::iterator it = _tmpList.begin(); it != _tmpList.end(); it++)
-	{
-		if (it->first > it->second)
-			swapPair(it->first, it->second);
+		if (vec[i] <= vec[j])
+			i++;
+		else
+		{
+			int value = vec[j];
+			int k = j;
+			while (k > i)
+			{
+				vec[k] = vec[k - 1];
+				k--;
+			}
+			vec[i] = value;
+			i++;
+			mid++;
+			j++;
+		}
 	}
 }
 
-void	PmergeMe::orderVPairs()
+void	vectorFJSort(std::vector<int> &vec, int left, int right)
 {
-	for (int i = 0; i < _tmpVec.size(); i++)
+	if (left >= right)
+		return;
+
+	int mid = (left + right) / 2;
+	vectorFJSort(vec, left, mid);
+	vectorFJSort(vec, mid + 1, right);
+	vectorMerge(vec, left, mid, right);
+	vectorInsertSort(vec, left, right);
+}
+
+void	listFJSort(std::list<int> &list, std::list<int>::iterator left, std::list<int>::iterator right)
+{
+	if (std::distance(left, right) <= 1)
+		return;
+
+	std::list<int>::iterator mid = std::next(left, std::distance(left, right) / 2);
+	listFJSort(list, left, mid);
+	listFJSort(list, mid, right);
+	listMerge(list, left, mid, right);
+	listInsertSort(list, left, right);
+}
+
+void	listMerge(std::list<int> &list, std::list<int>::iterator left, std::list<int>::iterator mid, std::list<int>::iterator right)
+{
+	std::list<int>::iterator	i = left;
+	std::list<int>::iterator	j = std::next(mid);
+
+	while (i != mid && j != right)
 	{
-		if (_tmpVec[i].first > _tmpVec[i].second)
-			swapPair(_tmpVec[i].first, _tmpVec[i].second);
+		if (*i <= *j)
+			i++;
+		else
+		{
+			int value = *j;
+			list.erase(j);
+			list.insert(i, value);
+			i++;
+			mid++;
+			j++;
+		}
 	}
 }
 
-void	PmergeMe::sortVPairs()
+void	listInsertSort(std::list<int> &list, std::list<int>::iterator left, std::list<int>::iterator right)
 {
-	
-}
-
-void	PmergeMe::sortLPairs()
-{
-
-}
-
-void	PmergeMe::swapPair(int &a, int &b)
-{
-	int tmp = a;
-	a = b;
-	b = tmp;
+	for (std::list<int>::iterator it = std::next(left); it != std::next(right); ++it)
+	{
+		int key = *it;
+		std::list<int>::iterator j = std::prev(it);
+		while (j != left && *j > key)
+		{
+			*(std::next(j)) = *j;
+			j--;
+		}
+		*(std::next(j)) = key;
+	}
 }

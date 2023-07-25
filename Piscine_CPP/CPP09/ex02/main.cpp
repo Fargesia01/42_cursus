@@ -1,4 +1,13 @@
-#include "PmergeMe.hpp"
+#include "PmergeMe.h"
+
+void	printVec(std::vector<int> vec)
+{
+	for (int i = 0; i < vec.size(); i++)
+	{
+		std::cout << vec[i] << " ";
+	}
+	std::cout << std::endl;
+}
 
 bool	checkArg(char *arg)
 {
@@ -20,6 +29,11 @@ bool	checkArg(char *arg)
 
 int	main(int argc, char **argv)
 {
+	std::vector<int>	vec;
+	std::list<int>		list;
+	timeval			Vstart, Vend;
+	timeval			Lstart, Lend;
+
 	if (argc < 2)
 	{
 		std::cout << "Error: Not enough arguments" << std::endl;
@@ -29,8 +43,25 @@ int	main(int argc, char **argv)
 	{
 		if (!checkArg(argv[i]))
 			return (1);
+		vec.push_back(std::atoi(argv[i]));
+		list.push_back(std::atoi(argv[i]));
 	}
-	PmergeMe	pm(argv);
+
+	std::cout << "Before: ";
+	printVec(vec);
+	gettimeofday(&Vstart, NULL);
+	vectorFJSort(vec, 0, vec.size() - 1);
+	gettimeofday(&Vend, NULL);
+	std::cout << "After: ";
+	printVec(vec);
+
+	std::cout << "Time to process a range of " << vec.size() << " elements with std::vector<int> : " << (Vend.tv_sec - Vstart.tv_sec) * 10000 << "." << Vend.tv_usec - Vstart.tv_usec << " us" << std::endl;
 	
-	pm.sort();
+	gettimeofday(&Lstart, NULL);
+	listFJSort(list, list.begin(), list.end());
+	gettimeofday(&Lend, NULL);
+
+	std::cout << "Time to process a range of " << vec.size() << " elements with std::list<int> : " << (Lend.tv_sec - Lstart.tv_sec) * 10000<< "." << Lend.tv_usec - Lstart.tv_usec << " us" << std::endl;
+
+	return (0);
 }
