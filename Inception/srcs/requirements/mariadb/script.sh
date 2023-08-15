@@ -1,15 +1,21 @@
 #!/bin/bash
 
-service mysql start;
+cat .exist 2> /dev/null
+if [ $? -ne 0 ]; then
 
-SQL_COMMANDS="CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE};
-CREATE USER IF NOT EXISTS ${SQL_USER}@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';
-GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO ${SQL_USER}@%' IDENTIFIED BY '${SQL_PASSWORD}';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';
-FLUSH PRIVILEGES;"
+	mysql_install_db --datadir=/var/lib/mysql --auth-root-authentication-method=normal
+	chown -R mysql:mysql /var/lib/mysql
+	#chown -R mysql:mysql /run/mysqld
+	
+	/usr/bin/mysqld_safe --datadir=/var/lib/mysql &
 
-mysql -e "$SQL_COMMANDS"
+	while ! mysqladmin ping -h "localhost" --silent; do
+    	sleep 1
+	done
 
-mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
+	eval "echo \"$(cat /tmp/setup.sql)\"" | mariadb -u root -p${SQL_ROOT_PASSWORD}
+	touch .exist
+	exit
+fi
 
-exec mysqld_safe
+exec /usr/bin/mysqld_safe --datadir=/var/lib/mysql

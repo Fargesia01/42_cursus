@@ -8,6 +8,7 @@ RUN apt update -y \
 
 COPY 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY script.sh /etc/mysql/script.sh
+COPY setup.sql /tmp/setup.sql
 
 RUN chmod +x /etc/mysql/script.sh
 
