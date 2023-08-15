@@ -5,7 +5,7 @@ if [ $? -ne 0 ]; then
 
 	mysql_install_db --datadir=/var/lib/mysql --auth-root-authentication-method=normal
 	chown -R mysql:mysql /var/lib/mysql
-	#chown -R mysql:mysql /run/mysqld
+	chown -R mysql:mysql /run/mysqld
 	
 	/usr/bin/mysqld_safe --datadir=/var/lib/mysql &
 

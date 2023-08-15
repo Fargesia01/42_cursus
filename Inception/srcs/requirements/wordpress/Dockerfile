@@ -7,11 +7,13 @@ RUN apt-get update -y && apt-get upgrade -y \
 	php-mysql \
 	mariadb-client
 	
-RUN wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz -P /var/www
+RUN mkdir -p /var/www/html
+#RUN chown -R root:root /var/www/html
 
-RUN cd /var/www && tar -xzf wordpress-6.2.2-fr_FR.tar.gz && rm wordpress-6.2.2-fr_FR.tar.gz
+RUN wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz -P /var/www/html
 
-RUN chown -R root:root /var/www/wordpress
+RUN cd /var/www/html && tar -xzf wordpress-6.2.2-fr_FR.tar.gz && rm wordpress-6.2.2-fr_FR.tar.gz
+
 
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
