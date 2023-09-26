@@ -7,13 +7,12 @@ RUN apt-get update -y && apt-get upgrade -y \
 	php-mysql \
 	mariadb-client
 	
+RUN wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz -P /var/www
+
+RUN cd /var/www && tar -xzf wordpress-6.2.2-fr_FR.tar.gz && rm wordpress-6.2.2-fr_FR.tar.gz
+
 RUN mkdir -p /var/www/html
 #RUN chown -R root:root /var/www/html
-
-RUN wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz -P /var/www/html
-
-RUN cd /var/www/html && tar -xzf wordpress-6.2.2-fr_FR.tar.gz && rm wordpress-6.2.2-fr_FR.tar.gz
-
 
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
@@ -22,8 +21,10 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod  +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-COPY script.sh /var/www/script.sh
+COPY script.sh /tmp/script.sh
 
-CMD ["/var/www/script.sh"]
+EXPOSE 9000
 
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+ENTRYPOINT ["sh", "/tmp/script.sh"]
+
+#CMD ["/usr/sbin/php-fpm7.3", "-F"]
