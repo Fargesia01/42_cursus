@@ -12,7 +12,7 @@ RUN wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz -P /var/www
 RUN cd /var/www && tar -xzf wordpress-6.2.2-fr_FR.tar.gz && rm wordpress-6.2.2-fr_FR.tar.gz
 
 RUN mkdir -p /var/www/html
-#RUN chown -R root:root /var/www/html
+RUN chown -R root:root /var/www/html
 
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
@@ -26,5 +26,3 @@ COPY script.sh /tmp/script.sh
 EXPOSE 9000
 
 ENTRYPOINT ["sh", "/tmp/script.sh"]
-
-#CMD ["/usr/sbin/php-fpm7.3", "-F"]

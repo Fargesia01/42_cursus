@@ -2,10 +2,6 @@
 
 sleep 10
 
-if [ -e "/var/www/wordpress/wp-condig.php" ]; then
-	exit 1
-fi
-
 cd /var/www/html
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
@@ -18,6 +14,12 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 		--dbpass=$SQL_PASSWORD \
 		--dbhost=mariadb --path='/var/www/html' \
 		--locale=en_US --skip-check
+
+	wp core install --url="${WP_URL}" --title="${TITLE}" --admin_user="${WP_ADMIN}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_EMAIL}" --locale=en_US --skip-email --allow-root
+
+	wp user create "${WP_USER}" "${WP_EMAIL}" --user_pass="${WP_USERPASS}" --role=author --allow-root
+
+
 fi
 
 /usr/sbin/php-fpm7.3 -F -O
