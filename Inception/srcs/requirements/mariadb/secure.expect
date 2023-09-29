@@ -1,0 +1,23 @@
+#!/usr/bin/expect
+
+spawn mysql_secure_installation
+
+set pass $env(SQL_ROOT_PASSWORD)
+
+send "\n"
+
+send "Y\n" ;
+
+send "$pass\n" ;
+
+send "$pass\n" ;
+
+send "Y\n" ;
+
+send "Y\n" ;
+
+send "Y\n" ;
+
+send "Y\n" ;
+
+expect eof

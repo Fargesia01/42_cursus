@@ -2,11 +2,15 @@
 
 service mysql start
 
-ls /var/run/mysqld
-eval "echo \"$(cat /tmp/setup.sql)\"" | mariadb -u root -p${SQL_ROOT_PASSWORD}
+echo "test"
 
-mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
+if [ -f "/tmp/bool.txt" ]; then
+	echo "Database already exists!\n"
+else
+	echo "Creating new database..."
+	/tmp/secure.expect
+	/tmp/mysql.expect
+	touch /tmp/bool.txt
+fi
 
-ls /var/run/mysqld
-
-exec mysqld
+exec /usr/bin/mysqld --user=mysql --console

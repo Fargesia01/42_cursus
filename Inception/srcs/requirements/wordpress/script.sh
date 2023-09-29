@@ -13,11 +13,11 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 		--dbuser=$SQL_USER \
 		--dbpass=$SQL_PASSWORD \
 		--dbhost=mariadb --path='/var/www/html' \
-		--locale=en_US --skip-check
+		--locale=en_US
 
-	wp core install --url="${WP_URL}" --title="${TITLE}" --admin_user="${WP_ADMIN}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_EMAIL}" --locale=en_US --skip-email --allow-root
+	wp core install --url="${WP_URL}" --title="${TITLE}" --admin_user="${WP_ADMIN}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_ADMIN_EMAIL}" --locale=en_US --skip-email --allow-root
 
-	wp user create "${WP_USER}" "${WP_EMAIL}" --user_pass="${WP_USERPASS}" --role=author --allow-root
+	wp user create "${WP_USER}" "${WP_USER_EMAIL}" --user_pass="${WP_USERPASS}" --role=author --allow-root
 
 
 fi

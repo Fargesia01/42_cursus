@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+
+set db $env(SQL_DATABASE)
+set user $env(SQL_USER)
+set pass $env(SQL_PASSWORD)
+set root $env(SQL_ROOT_PASSWORD)
+
+spawn mysql -u root -p$pass
+
+send "CREATE DATABASE IF NOT EXISTS `$db`;\n"
+
+send "CREATE USER IF NOT EXISTS '$user'@'localhost' IDENTIFIED BY '$pass';\n"
+
+send "GRANT ALL PRIVILEGES ON `$db`.* TO '$user'@'%' IDENTIFIED BY '$pass';\n"
+
+send "ALTER USER root@localhost IDENTIFIED BY '$root';\n"
+
+send "FLUSH PRIVILEGES;\n"
+
+send "exit\n"
+
+expect eof

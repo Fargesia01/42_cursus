@@ -21,7 +21,13 @@ services :
     container_name: mariadb
     networks:
       - inception
-    build: requirements/mariadb
+    build:
+      context: requirements/mariadb
+      args:
+        - SQL_DATABASE=${SQL_DATABASE}
+        - SQL_USER=${SQL_USER}
+        - SQL_PASSWORD=${SQL_PASSWORD}
+        - SQL_ROOT_PASSWORD=${SQL_ROOT_PASSWORD}
     env_file: .env
     volumes: 
       - mariadb:/var/lib/mysql
