@@ -11,7 +11,7 @@ build:
 clean:
 	docker-compose -f srcs/docker-compose.yml down -v; \
 	docker system prune -af; \
-	sudo rm -Rf /home/sylvain/Bureau/inception/mariadb/*; \
-	sudo rm -Rf /home/sylvain/Bureau/inception/wordpress/*; \
+	sudo rm -Rf /home/slott/Desktop/data/mariadb/*; \
+	sudo rm -Rf /home/slott/Desktop/data/wordpress/*; \
 	
 .PHONY: all re down clean build
