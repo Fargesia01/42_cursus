@@ -51,18 +51,18 @@ services :
  
 volumes :
   wordpress:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/home/sylvain/Bureau/inception/wordpress'
-  mariadb:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/home/sylvain/Bureau/inception/mariadb'
+   driver: local
+   driver_opts:
+     type: 'none'
+     o: 'bind'
+     device: '/home/sylvain/Bureau/inception/wordpress'
+ mariadb:
+   driver: local
+   driver_opts:
+     type: 'none'
+     o: 'bind'
+     device: '/home/sylvain/Bureau/inception/mariadb'
 
-networks: 
-  inception:
+etworks: 
+ inception:
     driver: bridge
