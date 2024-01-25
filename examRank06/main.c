@@ -16,8 +16,6 @@ typedef struct client_s
 
 int get_id(client_t *clients, int socket, int nbr_client)
 {
-  int id;
-
   for (int i = 0; i < nbr_client; i++)
   {
     if (clients[i].socket == socket)
