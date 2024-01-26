@@ -1,0 +1,56 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-I",
+      "includes",
+      "-Wall",
+      "-Wextra",
+      "-std=c++98",
+      "-fsanitize=address",
+      "-o",
+      "obj/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC",
+    "file": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/src/main.cpp",
+    "output": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/obj/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-I",
+      "includes",
+      "-Wall",
+      "-Wextra",
+      "-std=c++98",
+      "-fsanitize=address",
+      "-o",
+      "obj/server/client_management.o",
+      "src/server/client_management.cpp"
+    ],
+    "directory": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC",
+    "file": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/src/server/client_management.cpp",
+    "output": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/obj/server/client_management.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-I",
+      "includes",
+      "-Wall",
+      "-Wextra",
+      "-std=c++98",
+      "-fsanitize=address",
+      "-o",
+      "obj/server/init_server.o",
+      "src/server/init_server.cpp"
+    ],
+    "directory": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC",
+    "file": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/src/server/init_server.cpp",
+    "output": "/home/sylvain/Desktop/Programmation/42_cursus/Ft_IRC/obj/server/init_server.o"
+  }
+]
