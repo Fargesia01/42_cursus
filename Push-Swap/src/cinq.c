@@ -13,9 +13,6 @@
 
 void	cinq(t_stru *s)
 {
-	int	i;
-
-	i = 0;
 	while (s->size_a != s->max_size - 2)
 	{
 		if (s->stack_a[0] == 0 || s->stack_a[0] == 1)

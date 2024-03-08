@@ -1,33 +1,25 @@
-SRCS	= push_swap.c utils.c ope/swap.c ope/push.c ope/rotate.c ope/reverse_rotate.c algo/radix.c errors.c ft_split.c algo/trois.c algo/cinq.c
-
-HEAD	= push_swap.h
-
-OBJS 	= $(SRCS:.c=.o)
-
+SRCS	= $(wildcard src/*.c)
+OBJS    = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+OBJ_DIR = obj
 NAME	= push_swap
-
-LIB		= ar rcs
-
 CC		= gcc
-
-RM		= rm -f
-
 CFLAGS	= -Wall -Wextra -Werror
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEAD)
+$(OBJ_DIR)/%.o: src/%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 $(NAME): $(OBJS)
-	 $(CC) -o $(NAME) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS)
 
 all:	$(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean:	clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re:		fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean
