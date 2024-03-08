@@ -1,39 +1,33 @@
-SRCS	= 	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_strdup.c ft_calloc.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_split.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strmapi.c ft_striteri.c
+SRCS	= $(wildcard src/*.c)
 
-SRCSB	=	ft_lstnew.c 
+OBJS    = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-HEAD	= libft.h
-
-OBJS 	= $(SRCS:.c=.o)
-
-OBJSB	= $(SRCSB:.c=.0)
+OBJ_DIR = obj
 
 NAME	= libft.a
 
 LIB		= ar rcs
 
 CC		= gcc
-RM		= rm -f
 
 CFLAGS	= -Wall -Wextra -Werror
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEAD)
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 $(NAME): $(OBJS)
-		$(LIB) $(NAME) $(OBJS)
+	$(LIB) $(NAME) $(OBJS)
 
 all:	$(NAME)
+	@echo "TEST " $(SRCS)
 
 clean:
-	$(RM) $(OBJS) $(OBJSB)
+	rm -rf $(OBJ_DIR)
 
 fclean:	clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re:		fclean all
 
-bonus: $(OBJS) $(OBJSB)
-		$(LIB) $(NAME) $(OBJS) $(OBJSB)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fsrc/%.ce
