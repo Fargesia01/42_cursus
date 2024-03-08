@@ -1,20 +1,14 @@
-SRCS	= ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_putunint.c ft_putnbr_hexa.c ft_putptr.c
-
-HEAD	= ft_printf.h
-
-OBJS 	= $(SRCS:.c=.o)
-
+SRCS	= $(wildcard src/*.c)
+OBJS    = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+OBJ_DIR = obj
 NAME	= libftprintf.a
-
 LIB		= ar rcs
-
 CC		= gcc
-RM		= rm -f
-
 CFLAGS	= -Wall -Wextra -Werror
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEAD)
+$(OBJ_DIR)/%.o: src/%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 $(NAME): $(OBJS)
 		$(LIB) $(NAME) $(OBJS)
@@ -22,10 +16,10 @@ $(NAME): $(OBJS)
 all:	$(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean:	clean
-	$(RM) $(NAME)
+	rm -r $(NAME)
 
 re:		fclean all
 
