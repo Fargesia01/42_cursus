@@ -9,7 +9,7 @@
 /*   Updated: 2021/11/04 13:44:18 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	check_flag(char *str, va_list ptr, int c);
 

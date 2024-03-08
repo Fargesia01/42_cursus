@@ -9,7 +9,7 @@
 /*   Updated: 2021/11/04 12:58:24 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	ft_putnbr_hexa(unsigned int nbr, char *base, int c)
 {

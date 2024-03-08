@@ -9,7 +9,7 @@
 /*   Updated: 2021/11/03 14:04:15 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	ft_putunint(unsigned int n, int c)
 {

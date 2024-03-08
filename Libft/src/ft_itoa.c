@@ -9,7 +9,7 @@
 /*   Updated: 2021/10/21 17:05:37 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../libft.h"
 
 static void	ft_putnbr(long n, int c, char *tab);
 

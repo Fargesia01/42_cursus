@@ -9,7 +9,7 @@
 /*   Updated: 2021/11/01 14:58:23 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../libft.h"
 
 int		compteur_case(const char *s, char ch);
 int		compteur_taille(const char *s, char ch);

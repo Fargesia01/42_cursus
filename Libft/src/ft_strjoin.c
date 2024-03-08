@@ -9,7 +9,7 @@
 /*   Updated: 2021/10/16 17:18:50 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../libft.h"
 
 char	*ft_strjoin(const char *pre, const char *su)
 {

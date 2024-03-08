@@ -9,7 +9,7 @@
 /*   Updated: 2021/10/23 18:37:31 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../libft.h"
 
 static int		ft_strcmp(char *s1, char *s2);
 size_t			ft_leng(char *str);

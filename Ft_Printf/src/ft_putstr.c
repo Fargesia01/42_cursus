@@ -9,7 +9,7 @@
 /*   Updated: 2021/11/04 13:06:39 by slott            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	ft_putstr(char *str, int c)
 {
