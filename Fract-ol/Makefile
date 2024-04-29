@@ -11,7 +11,7 @@ LIB		= ar rcs
 CC		= gcc
 RM		= rm -f
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra 
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEAD)

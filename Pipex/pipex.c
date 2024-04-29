@@ -25,10 +25,13 @@ int	main(int argc, char *argv[], char *envp[])
 		return (write(STDERR, "Error while opening outfile\n", 28));
 	if (pipe(stru.p) < 0)
 		return (write(STDERR, "Error while creating pipe\n", 26));
+
 	stru.pid = fork();
+
 	if (stru.pid == 0)
 		if (!first_child(&stru, argv, envp))
 			return (write(STDERR, "Error: command 1 not found\n", 27));
+
 	waitpid(stru.pid, NULL, 0);
 	stru.pid2 = fork();
 	if (stru.pid2 == 0)
