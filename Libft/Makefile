@@ -23,4 +23,4 @@ fclean:	clean
 
 re:		fclean all
 
-.PHONY: all clean fsrc/%.ce
+.PHONY: all clean fclean re
