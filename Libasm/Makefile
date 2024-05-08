@@ -25,7 +25,7 @@ obj/C/%.o: src/C/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEAD)
 
 $(TEST_EXE): $(C_OBJS) $(LIBRARY)
-	$(CC) -o $(TEST_EXE) $(C_OBJS) -L. -lasm
+	$(CC) -o $(TEST_EXE) $(C_OBJS) -L. -lasm -no-pie
 
 clean:
 	rm -rf obj
