@@ -2,7 +2,6 @@ import sys
 import string
 from solver import solve_2nd_degree, solve_1st_degree
 
-
 # left part of the equation
 decimal_eq1 = 0
 x_eq1 = 0
